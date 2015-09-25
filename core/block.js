@@ -34,6 +34,7 @@ goog.require('Blockly.Mutator');
 goog.require('Blockly.Warning');
 goog.require('Blockly.Workspace');
 goog.require('Blockly.Xml');
+goog.require('Blockly.FieldClickImage');
 goog.require('goog.array');
 goog.require('goog.asserts');
 goog.require('goog.math.Coordinate');
@@ -1038,6 +1039,10 @@ Blockly.Block.prototype.interpolate_ = function(message, args, lastDummyAlign) {
           case 'field_dropdown':
             field = new Blockly.FieldDropdown(element['options']);
             break;
+          case 'field_clickimage':
+            field = new Blockly.FieldClickImage(element['src'],
+                element['width'], element['height'], element['alt']);
+            break;
           case 'field_image':
             field = new Blockly.FieldImage(element['src'],
                 element['width'], element['height'], element['alt']);
@@ -1201,6 +1206,22 @@ Blockly.Block.prototype.getInput = function(name) {
   }
   // This input does not exist.
   return null;
+};
+
+/**
+ * Returns the index of an input in a block.
+ * @param {string} name The name of the input to find.
+ * @return {number} inputIndex Index of the input (or -1 if not found).
+ */
+Blockly.Block.prototype.getInputIndex = function(name) {
+  var inputIndex = -1;
+  for (var i = 0, input; input = this.inputList[i]; i++) {
+    if (input.name == name) {
+      inputIndex = i;
+      break;
+    }
+  }
+  return inputIndex;
 };
 
 /**
