@@ -116,6 +116,9 @@ Blockly.FieldClickImage.prototype.init = function(block) {
  * @private
  */
 Blockly.FieldClickImage.prototype.showEditor_ = function() {
+  if (this.sourceBlock_.isInFlyout) {
+    return;
+  }
   if (this.changeHandler_) {
     var saveDragMode = Blockly.dragMode_;
     Blockly.dragMode_ = 0;
