@@ -5,3 +5,9 @@ npm-debug.log
 .project
 *.pyc
 *.komodoproject
+
+*.iml
+.settings
+.project
+.pydevproject
+.idea
